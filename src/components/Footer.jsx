@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, ChevronRight, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Twitter from '../imgs/twitter.png';
 import Reddit from '../imgs/reddit.png';
 import Footerimg from '../imgs/footer.webp';
@@ -11,6 +12,39 @@ const Footer = ({ setIsOpen }) => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isSpecialPage = location.pathname === '/servicepage' || location.pathname === '/creationpage';
+
+  const handleHomeClick = () => {
+    if (isSpecialPage) {
+      navigate('/#home');
+    } else {
+      const homeElement = document.getElementById('home');
+      if (homeElement) {
+        homeElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn('Element with id="home" not found on the main page.');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleContactClick = () => {
+    if (setIsOpen) {
+      setIsOpen(true);
+    } else {
+      console.warn('setIsOpen is not defined. Ensure the prop is passed correctly.');
+      // Fallback: Scroll to contact section if it exists
+      const contactElement = document.getElementById('contact');
+      if (contactElement) {
+        contactElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn('Contact section not found.');
+      }
+    }
+  };
 
   const services = [
     "Game Development",
@@ -23,7 +57,7 @@ const Footer = ({ setIsOpen }) => {
   const socialLinks = [
     {
       icon: <img src={Twitter} alt="X" className="w-5 h-5" />,
-      hoverFilter: 'brightness(0)', // Black on hover
+      hoverFilter: 'brightness(0)',
       label: 'X',
       link: 'https://x.com'
     },
@@ -47,11 +81,20 @@ const Footer = ({ setIsOpen }) => {
     },
     {
       icon: <img src={Reddit} alt="Reddit" className="w-5 h-5" />,
-hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightness(80%)',
+      hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightness(80%)',
       label: 'Reddit',
       link: 'https://reddit.com'
     },
   ];
+
+  const quickLinks = isSpecialPage
+    ? [{ label: 'Home', href: '#home', onClick: handleHomeClick }]
+    : [
+        { label: 'About Us', href: '#about' },
+        { label: 'Services', href: '#service' },
+        { label: 'Our Games', href: '#Creations' },
+        { label: 'Careers', href: '#career' },
+      ];
 
   return (
     <div className="flex flex-col md:flex-row flex-wrap w-full">
@@ -73,7 +116,7 @@ hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightnes
               We're ready to bring your ideas to life.
             </p>
             <motion.button
-              onClick={() => setIsOpen(true)}
+              onClick={handleContactClick}
               className="mt-4 px-6 py-3 bg-purple-700 hover:bg-purple-600 text-white rounded-full font-medium flex items-center gap-2 group transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -141,15 +184,16 @@ hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightnes
             Quick Links
           </h3>
           <ul className="grid gap-2 text-sm">
-            {[
-              { label: 'About Us', href: '#about' },
-              { label: 'Services', href: '#service' },
-              { label: 'Our Games', href: '#Creations' },
-              { label: 'Careers', href: '#career' },
-            ].map(({ label, href }) => (
+            {quickLinks.map(({ label, href, onClick }) => (
               <li key={label} className="flex items-center hover:text-purple-300">
                 <ChevronRight size={14} className="text-purple-500 mr-2" />
-                <a href={href}>{label}</a>
+                {onClick ? (
+                  <button onClick={onClick} className="text-left">
+                    {label}
+                  </button>
+                ) : (
+                  <a href={href}>{label}</a>
+                )}
               </li>
             ))}
           </ul>

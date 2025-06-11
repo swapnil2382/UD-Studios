@@ -6,6 +6,8 @@ import MINDS from "../imgs/MINDS.png";
 import Redder from "../imgs/Redder.png";
 import MRPA from "../imgs/mrpa.jpg";
 import HeroImage from "../imgs/creationpage.webp";
+import Footer from "./Footer";
+
 
 const creationsData = {
     games: [
@@ -474,6 +476,9 @@ export default function CreationPage() {
           }
         `}</style>
             </main>
+            <Footer/>
+
         </>
+    
     );
 }

@@ -4,7 +4,7 @@ import { CgWebsite } from "react-icons/cg";
 import { FaGamepad, FaPencilRuler, FaPaintBrush, FaLightbulb } from "react-icons/fa";
 import { TbCube3dSphere } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-// Removed router dependency
+import Footer from "./Footer";
 
 const services = [
   {
@@ -48,7 +48,7 @@ const services = [
 import HeroImage from "../imgs/serviecepage.png";
 
 export default function ServicePage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeDescription, setActiveDescription] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -83,9 +83,8 @@ export default function ServicePage() {
   const scrollToDescription = (index) => {
     const element = document.getElementById(`service-${index}`);
     if (element) {
-      // Calculate the offset position (accounting for navbar height)
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - 100; // 100px offset for navbar
+      const offsetPosition = elementPosition - 100;
 
       window.scrollTo({
         top: offsetPosition,
@@ -94,12 +93,10 @@ export default function ServicePage() {
     }
   };
 
-  // Split the hero heading text into words for animation
   const h1Text = "Ignite Growth".split(" ");
 
   return (
     <>
-      {/* Add Google Fonts */}
       <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet"
@@ -111,7 +108,6 @@ export default function ServicePage() {
           ref={containerRef}
           className="min-h-screen flex items-center justify-center relative"
         >
-          {/* Mouse-following glow effect */}
           <div
             className="absolute pointer-events-none z-0"
             style={{
@@ -126,8 +122,6 @@ export default function ServicePage() {
               filter: "blur(20px)",
             }}
           />
-
-          {/* Floating particles effect */}
           <div className="absolute inset-0 z-0">
             {[...Array(8)].map((_, i) => (
               <motion.div
@@ -152,7 +146,6 @@ export default function ServicePage() {
           </div>
 
           <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between relative z-10">
-            {/* Left: Text and Button - Updated for laptop view */}
             <div className="w-full md:w-3/4 text-center md:text-left mb-8 md:mb-0">
               <motion.h1
                 className="text-3xl xs:text-4xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold uppercase tracking-wider leading-snug mb-6 sm:mb-8 max-w-[300px] md:max-w-full mx-auto md:mx-0"
@@ -231,24 +224,22 @@ export default function ServicePage() {
                 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">Explore Our Creations</span>
+                <span className="relative z-0">Explore Our Creations</span>
               </motion.button>
             </div>
 
-            {/* Right: Image - Updated for laptop view */}
             <motion.div
-  className="w-full md:w-1/4 flex justify-center md:justify-end"
-  initial={{ opacity: 0, x: 50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.6, delay: 1.2 }}
->
-  <img
-    src={HeroImage}
-    alt="Professional Service Illustration"
-    className="w-3/4 sm:w-2/3 md:w-full max-w-xs sm:max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-md object-contain transform md:scale-110 lg:scale-125"
-  />
-</motion.div>
-
+              className="w-full md:w-1/4 flex justify-center md={true} justify-content={true}"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              <img
+                src={HeroImage}
+                alt="Professional Service Illustration"
+                className="w-3/4 sm:w-2/3 md:w-full max-w-xs sm:max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-md object-contain transform md:scale-110 lg:scale-125"
+              />
+            </motion.div>
           </div>
         </section>
 
@@ -288,13 +279,11 @@ export default function ServicePage() {
                 }}
                 onClick={() => scrollToDescription(index)}
               >
-                {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 to-purple-800/0 group-hover:from-purple-600/50 group-hover:to-purple-800/50 transition-all duration-300 z-0" />
-                
                 <div className="relative z-10 flex flex-col items-center text-center space-y-4">
                   <motion.div
-                    className="text-purple-400 group-hover:text-white transition-colors duration-300"
-                    whileHover={{ scale: 1.2, rotate: 10, y: -5 }}
+                    className="text-purple-400 group-hover:text-white transition-colors duration-200"
+                    whileHover={{ scale: 1.2, rotate: 0, y: -5 }}
                     transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   >
                     {service.icon}
@@ -363,7 +352,13 @@ export default function ServicePage() {
                   </h3>
                   <p
                     className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed"
-                    style={{ fontFamily: '"Rajdhani", "Exo 2", sans-serif', fontWeight: 500 }}
+                    style={{
+                      fontFamily: '"Rajdhani", "Exo 2", sans-serif',
+                      fontWeight: 500,
+                      textAlign: 'justify',
+                      wordBreak: 'keep-all',
+                      hyphens: 'none',
+                    }}
                   >
                     {service.description}
                   </p>
@@ -374,7 +369,6 @@ export default function ServicePage() {
         </section>
       </div>
 
-      {/* Custom CSS for animations */}
       <style jsx>{`
         @keyframes shineText {
           0% {
@@ -385,6 +379,7 @@ export default function ServicePage() {
           }
         }
       `}</style>
+      <Footer />
     </>
   );
 }
