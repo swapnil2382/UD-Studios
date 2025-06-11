@@ -2,6 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, ChevronRight, Instagram, Linkedin, Youtube } from 'lucide-react';
+import Twitter from '../imgs/twitter.png';
+import Reddit from '../imgs/reddit.png';
+import Footerimg from '../imgs/footer.webp';
 
 const Footer = ({ setIsOpen }) => {
   const [ref, inView] = useInView({
@@ -19,7 +22,7 @@ const Footer = ({ setIsOpen }) => {
 
   const socialLinks = [
     {
-      icon: <img src="src/imgs/twitter.png" alt="X" className="w-5 h-5" />,
+      icon: <img src={Twitter} alt="X" className="w-5 h-5" />,
       hoverFilter: 'brightness(0)', // Black on hover
       label: 'X',
       link: 'https://x.com'
@@ -43,7 +46,7 @@ const Footer = ({ setIsOpen }) => {
       link: 'https://linkedin.com'
     },
     {
-      icon: <img src="src/imgs/reddit.png" alt="Reddit" className="w-5 h-5" />,
+      icon: <img src={Reddit} alt="Reddit" className="w-5 h-5" />,
 hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightness(80%)',
       label: 'Reddit',
       link: 'https://reddit.com'
@@ -81,7 +84,7 @@ hoverFilter: 'invert(50%) sepia(80%) hue-rotate(340deg) saturate(600%) brightnes
           </div>
 
           <img
-            src="src/imgs/footer.webp"
+            src={Footerimg}
             alt="Gaming Decorative"
             className="w-[160px] sm:w-[180px] md:w-[200px] h-auto object-contain"
           />

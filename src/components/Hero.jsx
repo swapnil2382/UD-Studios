@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+import Udlogo from "../imgs/UDLOGO.png"; // Adjust the path as necessary
 
 
 
@@ -110,7 +111,7 @@ export default function HeroSection() {
               }}
             >
               <img
-                src="src/imgs/UDLOGO.png"
+                src={Udlogo}
                 alt="UD Studios Logo"
                 className="relative w-full h-auto object-contain filter brightness-110 transition-transform duration-300 ease-in-out"
                 style={{

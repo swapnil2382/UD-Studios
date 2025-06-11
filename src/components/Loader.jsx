@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const logo = 'src/imgs/UDLOGO.png'; // Replace with your actual logo path
+import logo from '../imgs/UDLOGO.png'; // Replace with your actual logo path
 
 const Loader = ({ onLoadingComplete }) => {
   const [loadingStage, setLoadingStage] = useState('initial'); // 'initial', 'zooming', 'waves', 'fading', 'complete'

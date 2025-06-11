@@ -5,9 +5,9 @@ import { FaHourglassEnd } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 // Image paths
-const mindsImage = "src/imgs/MINDS.png";
-const redderImage = "src/imgs/Redder.png";
-const mrPAImage = "src/imgs/mrpa.jpg";
+import mindsImage from "../imgs/MINDS.png";
+import redderImage from "../imgs/Redder.png";
+import mrPAImage from "../imgs/mrpa.jpg";
 
 const games = [
   {

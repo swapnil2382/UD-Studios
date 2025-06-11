@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Gamepad2, PaintBucket, Layout, Shapes, Globe, Mountain, ChevronLeft, ChevronRight, Code, Zap, Target, Cpu } from 'lucide-react';
+import Game from '../imgs/game dev.jpg'; // Assuming you have a game image
+import UIUX from '../imgs/UX Design.jpg'; // Assuming you have a UI/UX image
+import GraphicArt from '../imgs/Graphic Artistry.png'; // Assuming you have a Graphic Art image
+import Logo from '../imgs/Logo Creation.avif'; // Assuming you have a Logo image
+import WebDev from '../imgs/Web Development.jpg'; // Assuming you have a Web Development image
+import LevelDesign from '../imgs/Level Design.jpg'; // Assuming you have a Level Design image
 
 const ServiceCard = ({ title, subtitle, icon, image, isActive }) => {
   return (
@@ -64,37 +70,37 @@ const Services = () => {
       title: 'Game Development',
       subtitle: 'Mobile & PC Production',
       icon: <Gamepad2 size={24} />,
-      image: 'src/imgs/game dev.jpg',
+      image: Game,
     },
     {
       title: 'UI/UX Design',
       subtitle: 'Experience & Interface Strategy',
       icon: <Layout size={24} />,
-      image: 'src/imgs/UX Design.jpg',
+      image: UIUX,
     },
     {
       title: 'Graphic Artistry',
       subtitle: 'Visual Content Creation',
       icon: <PaintBucket size={24} />,
-      image: 'src/imgs/Graphic Artistry.png',
+      image: GraphicArt,
     },
     {
       title: 'Logo Creation',
       subtitle: 'Brand Identity Emblems',
       icon: <Shapes size={24} />,
-      image: 'src/imgs/Logo Creation.avif',
+      image: Logo,
     },
     {
       title: 'Web Development',
       subtitle: 'Responsive Site Development',
       icon: <Globe size={24} />,
-      image: 'src/imgs/Web Development.jpg',
+      image: WebDev,
     },
     {
       title: 'Level Design',
       subtitle: '2D & 3D Environment Art',
       icon: <Mountain size={24} />,
-      image: 'src/imgs/Level Design.jpg',
+      image: LevelDesign,
     },
   ];
 
