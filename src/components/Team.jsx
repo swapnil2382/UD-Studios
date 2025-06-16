@@ -3,7 +3,7 @@ import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
 import chang from '../imgs/chang.jpg'; 
-import joy from '../imgs/joy.jpg';
+import joy from '../imgs/Joy.jpg';
 import vk from '../imgs/Vasanth.jpg';
 
 const TeamMemberCard = ({ name, image }) => {
