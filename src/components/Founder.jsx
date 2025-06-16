@@ -216,7 +216,7 @@ const Founder = () => {
                 alt="Founder Vasanth"
                 className="relative w-full h-[400px] object-contain rounded-lg"
                 style={{ aspectRatio: '4/3' }}
-                whileHover={{ scale: 1.3 }}
+                whileHover={{ scale: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               />
             </div>

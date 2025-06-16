@@ -2,6 +2,9 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
+import chang from '../imgs/chang.jpg'; // Adjust the import path as necessary
+import joy from '../imgs/joy.jpg'; // Adjust the import path as necessary
+import vk from '../imgs/Vasanth.jpg';
 
 const TeamMemberCard = ({ name, image }) => {
   return (
@@ -14,13 +17,18 @@ const TeamMemberCard = ({ name, image }) => {
       viewport={{ once: true }}
       style={{ boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)" }}
     >
-      <motion.img
-        src={image}
-        alt={name}
-        className="w-full h-48 object-cover"
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      />
+      <div className="relative overflow-hidden">
+        <motion.img
+          src={image}
+          alt={name}
+          className="w-full h-[440px] object-cover object-top rounded-t-xl border-b-2 border-purple-500/30"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          onError={(e) => (e.target.src = 'https://via.placeholder.com/300')} // Fallback image
+          style={{ boxShadow: 'inset 0 0 10px rgba(147, 51, 234, 0.3)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      </div>
       <div className="px-6 py-4 text-white">
         <h3
           className="text-xl sm:text-2xl font-bold mb-2 tracking-wider text-purple-400"
@@ -69,9 +77,9 @@ const Team = () => {
 
   // Team members data
   const teamMembers = [
-    { name: "Joy Prancyka", image: "https://via.placeholder.com/150" },
-    { name: "Chang", image: "https://via.placeholder.com/150" },
-    { name: "Madhu Malar", image: "https://via.placeholder.com/150" },
+    { name: "Joy Prancyka", image: joy },
+    { name: "Chang", image: chang },
+    { name: "Madhu Malar", image: vk },
   ];
 
   return (

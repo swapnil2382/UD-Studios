@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Code, Gamepad2, Zap, Target, Cpu , ExternalLink } from "lucide-react";
+import { Code, Gamepad2, Zap, Target, Cpu, ExternalLink } from "lucide-react";
 import { FaHourglassEnd } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ const games = [
     description1: "Welcome to Mind's Hollow, a cursed realm where fantasy births fear, and reality twists in 2.5D. You're not alone… but you'll wish you were.",
     description2: "The timeline you walk was never yours. Here, time hunts you. Will you rip through the fabric of the Hollow, or be devoured by it?",
     image: mindsImage,
+    comingSoon: true,
   },
   {
     title: "REDDER",
@@ -23,6 +24,7 @@ const games = [
     description1: "Redder is a 3D multiplayer psychological horror where three friends investigate their missing companion, only to find themselves trapped in a haunted house with a cursed tunnel.",
     description2: "Visions twist, trust fades, and reality fractures as the house feeds on their minds. Each step draws them deeper into a paranormal nightmare, where the only way out is through the madness.",
     image: redderImage,
+    comingSoon: true,
   },
 ];
 
@@ -37,13 +39,12 @@ const bots = [
   }
 ];
 
-const GameCard = ({ title, tags, description1, description2, image, index }) => {
+const GameCard = ({ title, tags, description1, description2, image, index, comingSoon }) => {
   const navigate = useNavigate();
   const isEven = index % 2 === 0;
 
   const handleLearnMore = () => {
-    navigate('/creationpage');
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+    navigate(`/creationpage#${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`);
   };
 
   return (
@@ -147,9 +148,9 @@ const GameCard = ({ title, tags, description1, description2, image, index }) => 
         </div>
       </div>
 
-      {title === "MIND'S HOLLOW" && (
+      {comingSoon && (
         <motion.div
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white rounded-full px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold tracking-wide shadow-md backdrop-blur-md"
+          className={`absolute ${title === "REDDER" ? "top-4 left-4" : "top-4 right-4"} sm:${title === "REDDER" ? "top-6 left-6" : "top-6 right-6"} text-white rounded-full px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold tracking-wide shadow-md backdrop-blur-md`}
           style={{
             fontFamily: '"Orbitron", sans-serif',
             background: 'rgba(50, 50, 50, 0.9)',
@@ -165,6 +166,12 @@ const GameCard = ({ title, tags, description1, description2, image, index }) => 
 };
 
 const BotCard = ({ title, description1, description2, description3, description4, image }) => {
+  const navigate = useNavigate();
+
+  const handleLearnMore = () => {
+    navigate(`/creationpage#${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`);
+  };
+
   return (
     <motion.section
       className="w-full max-w-5xl mx-auto mb-16 flex flex-col md:flex-row rounded-xl overflow-hidden border border-purple-400/40 shadow-lg shadow-purple-900/30 bg-gradient-to-br from-black via-gray-900 to-black animate-pulse-custom"
@@ -176,16 +183,14 @@ const BotCard = ({ title, description1, description2, description3, description4
       style={{ boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)" }}
     >
       <div className="w-full md:w-[35%] h-48 md:h-auto">
- <motion.img
-  src={image}
-  alt={title}
-  className="w-full h-full md:object-cover"
-  style={{ filter: "brightness(1)", objectPosition: "center" }}
-  whileHover={{ scale: 1.05 }}
-  transition={{ duration: 0.3, ease: "easeInOut" }}
-/>
-
-
+        <motion.img
+          src={image}
+          alt={title}
+          className="w-full h-full md:object-cover"
+          style={{ filter: "brightness(1)", objectPosition: "center" }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        />
       </div>
       <div className="w-full md:w-[65%] flex flex-col justify-center px-6 sm:px-8 py-8 text-white">
         <h2
@@ -209,6 +214,7 @@ const BotCard = ({ title, description1, description2, description3, description4
               </p>
             )
         )}
+      
       </div>
     </motion.section>
   );
@@ -354,6 +360,7 @@ const Creations = () => {
               description2={game.description2}
               image={game.image}
               index={index}
+              comingSoon={game.comingSoon}
             />
           ))}
         </div>
@@ -388,7 +395,7 @@ const Creations = () => {
           {/* Test Mr.PA Link */}
           <div className="text-center mt-8">
             <motion.a
-              href="https://dummy-mrpa-link.com" // Replace with your actual Mr.PA website URL
+              href="https://mr-pa.vercel.app/" // Replace with your actual Mr.PA website URL
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full text-white font-semibold text-lg hover:brightness-110 transition-all shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-105"

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Code, Gamepad2, Zap, Cpu, ExternalLink } from "lucide-react";
 import MINDS from "../imgs/MINDS.png";
 import Redder from "../imgs/Redder.png";
 import MRPA from "../imgs/mrpa.jpg";
 import HeroImage from "../imgs/creationpage.webp";
 import Footer from "./Footer";
-
 
 const creationsData = {
     games: [
@@ -25,9 +24,8 @@ const creationsData = {
             description1: "Redder is a 3D multiplayer psychological horror where three friends investigate their missing companion, only to find themselves trapped in a haunted house with a cursed tunnel.",
             description2: "Visions twist, trust fades, and reality fractures as the house feeds on their minds. Each step draws them deeper into a paranormal nightmare, where the only way out is through the madness.",
             image: Redder,
-            comingSoon: false,
+            comingSoon: true,
         },
-
     ],
     bots: [
         {
@@ -42,6 +40,7 @@ const creationsData = {
 
 export default function CreationPage() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [activeTab, setActiveTab] = useState("games");
     const containerRef = useRef(null);
@@ -63,6 +62,25 @@ export default function CreationPage() {
         };
     }, []);
 
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            const element = document.getElementById(id);
+            if (element) {
+                const offsetTop = element.getBoundingClientRect().top + window.scrollY - 100; // Adjust offset for header
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                // Ensure correct tab is active
+                if (id.includes('mr.pa')) {
+                    setActiveTab('bots');
+                } else {
+                    setActiveTab('games');
+                }
+            }
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [location]);
+
     // Split the hero heading text into words for animation
     const h1Text = "Our Creations".split(" ");
 
@@ -72,7 +90,7 @@ export default function CreationPage() {
     // Handle Test Mr.PA button click
     const handleTestMrPA = () => {
         // Replace with actual Mr.PA website URL when available
-        window.open("https://mr-pa-demo.com", "_blank");
+        window.open("https://mr-pa.vercel.app/", "_blank");
     };
 
     return (
@@ -89,8 +107,6 @@ export default function CreationPage() {
                     ref={containerRef}
                     className="min-h-screen flex items-center justify-center relative"
                 >
-
-
                     {/* Mouse-following glow effect */}
                     <div
                         className="absolute pointer-events-none z-10"
@@ -248,7 +264,6 @@ export default function CreationPage() {
                             >
                                 <span className="relative z-10">Explore Our Services</span>
                             </motion.button>
-
                         </div>
 
                         {/* Right: Image (Desktop) / Top: Image (Mobile) */}
@@ -264,7 +279,6 @@ export default function CreationPage() {
                                 className="w-3/3 sm:w-2/2 md:w-full max-w-xs sm:max-w-sm md:max-w-md object-contain scale-100 lg:scale-150 transition-transform duration-500"
                             />
                         </motion.div>
-
                     </div>
                 </section>
 
@@ -323,6 +337,7 @@ export default function CreationPage() {
                                 {creationsData.games.map((game, index) => (
                                     <motion.article
                                         key={index}
+                                        id={game.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
                                         className="bg-[#1a1a1a] rounded-xl border border-white/10 hover:border-purple-500 hover:shadow-[0_0_15px_rgba(147,51,234,0.5)] transition-all duration-300 overflow-hidden"
                                         initial={{ opacity: 0, y: 50 }}
                                         whileInView={{ opacity: 1, y: 0 }}
@@ -414,6 +429,7 @@ export default function CreationPage() {
                             {creationsData.bots.map((bot, index) => (
                                 <motion.article
                                     key={index}
+                                    id={bot.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
                                     className="bg-[#1a1a1a] border border-purple-500 rounded-2xl p-6 sm:p-8 hover:shadow-[0_0_15px_rgba(147,51,234,0.5)] transition-all duration-300"
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -497,28 +513,26 @@ export default function CreationPage() {
 
                 {/* Custom CSS for animations */}
                 <style jsx>{`
-          @keyframes shineText {
-            0% {
-              background-position: 100% 0%;
-            }
-            100% {
-              background-position: -100% 0%;
-            }
-          }
-          
-          @keyframes textShine {
-            0% {
-              background-position: 100% 0%;
-            }
-            100% {
-              background-position: -100% 0%;
-            }
-          }
-        `}</style>
+                    @keyframes shineText {
+                        0% {
+                            background-position: 100% 0%;
+                        }
+                        100% {
+                            background-position: -100% 0%;
+                        }
+                    }
+                    
+                    @keyframes textShine {
+                        0% {
+                            background-position: 100% 0%;
+                        }
+                        100% {
+                            background-position: -100% 0%;
+                        }
+                    }
+                `}</style>
             </main>
             <Footer/>
-
         </>
-    
     );
 }
