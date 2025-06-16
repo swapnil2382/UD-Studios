@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { CgWebsite } from "react-icons/cg";
-import { FaGamepad, FaPencilRuler, FaPaintBrush, FaLightbulb } from "react-icons/fa";
+import { FaGamepad, FaPencilRuler, FaPaintBrush, FaLightbulb , FaRobot} from "react-icons/fa";
 import { TbCube3dSphere } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
@@ -43,6 +43,12 @@ const services = [
     icon: <TbCube3dSphere size={40} />,
     description: "Shape immersive game worlds with our 2D and 3D level design expertise. We craft environments that blend art and functionality, from sprawling landscapes to intricate dungeons. Using tools like Maya and custom editors, we ensure every space tells a story. Our designs elevate gameplay, drawing players into unforgettable adventures where every corner sparks curiosity and wonder."
   },
+  {
+    title: 'AI Automation',
+    subtitle: 'Effortless Digital Transformation',
+    icon: <FaRobot size={24} />,
+    description: "From managing emails to scheduling like a pro, it’s got you covered. Need content? Mr. PA got you. It works 24/7 to simplify your day and supercharge productivity.Smart, reliable, and always ready – Mr. PA does it all. Think faster schedules, smarter emails, and killer content in minutes.No burnout, no chaos – just smooth, intelligent automation.Your digital life, fully managed. Mr. PA never takes a day off."
+  }
 ];
 
 import HeroImage from "../imgs/serviecepage.png";

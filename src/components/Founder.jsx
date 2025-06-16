@@ -243,12 +243,9 @@ Your game shouldn't be a one-and-done release—it should be a living, breathing
                 
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center shadow-lg">
-                    <span className="text-xl font-bold text-white">V</span>
-                  </div>
                   <div>
-                    <p className="text-lg sm:text-xl font-bold text-white" style={{ fontFamily: '"Orbitron", sans-serif' }}>Vasanth</p>
-                    <p className="text-sm sm:text-base text-purple-300" style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}>Founder & CEO</p>
+                    <p className="text-lg sm:text-xl font-bold text-white" style={{ fontFamily: '"Orbitron", sans-serif' }}>Vasanth K</p>
+                    <p className="text-sm sm:text-base text-purple-300" style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}>Founder</p>
                   </div>
                 </div>
               </div>

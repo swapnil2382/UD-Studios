@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import { Code, Gamepad2, Zap, Cpu } from "lucide-react";
+import { Code, Gamepad2, Zap, Cpu, ExternalLink } from "lucide-react";
 import MINDS from "../imgs/MINDS.png";
 import Redder from "../imgs/Redder.png";
 import MRPA from "../imgs/mrpa.jpg";
@@ -68,6 +68,12 @@ export default function CreationPage() {
 
     // Tech icons for hero background
     const techIcons = [Code, Gamepad2, Zap, Cpu];
+
+    // Handle Test Mr.PA button click
+    const handleTestMrPA = () => {
+        // Replace with actual Mr.PA website URL when available
+        window.open("https://mr-pa-demo.com", "_blank");
+    };
 
     return (
         <>
@@ -388,7 +394,7 @@ export default function CreationPage() {
                                 style={{
                                     fontFamily: '"Orbitron", "Exo 2", "Rajdhani", monospace',
                                     letterSpacing: '0.1em',
-                                    lineHeight: '1.3', // 👈 Added
+                                    lineHeight: '1.3',
                                     background: 'linear-gradient(45deg, #ffffff 30%, rgba(255, 255, 255, 0.2) 50%, #ffffff 70%)',
                                     backgroundSize: '300% 300%',
                                     backgroundPosition: '100% 0%',
@@ -451,6 +457,40 @@ export default function CreationPage() {
                                     </div>
                                 </motion.article>
                             ))}
+
+                            {/* Test Mr.PA Button */}
+                            <motion.div
+                                className="flex justify-center mt-8 sm:mt-12"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.3 }}
+                                viewport={{ once: true }}
+                            >
+                                <motion.button
+                                    onClick={handleTestMrPA}
+                                    className="group relative px-8 sm:px-10 py-3 sm:py-4 rounded-full text-white font-semibold bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:via-indigo-500 hover:to-purple-600 transition-all duration-300 text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl border border-purple-400/30 hover:border-purple-300/50"
+                                    style={{
+                                        fontFamily: '"Orbitron", monospace',
+                                        letterSpacing: '0.05em',
+                                        textTransform: 'uppercase',
+                                        boxShadow: '0 8px 25px rgba(147, 51, 234, 0.4)',
+                                    }}
+                                    whileHover={{ 
+                                        scale: 1.05, 
+                                        y: -3, 
+                                        boxShadow: "0 12px 35px rgba(147, 51, 234, 0.6)" 
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Test Mr.PA
+                                        <ExternalLink size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+                                    </span>
+                                    
+                                    {/* Animated background glow */}
+                                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                                </motion.button>
+                            </motion.div>
                         </div>
                     )}
                 </section>

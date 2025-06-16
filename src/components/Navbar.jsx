@@ -12,6 +12,11 @@ const Navbar = ({ setIsOpen }) => {
   // Check if the current route is /servicepage or /creationpage
   const isSpecialPage = location.pathname === '/servicepage' || location.pathname === '/creationpage';
 
+  // Reset scroll position to top when navigating to a new route
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]); // Trigger when the pathname changes
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -37,21 +42,32 @@ const Navbar = ({ setIsOpen }) => {
         homeElement.scrollIntoView({ behavior: 'smooth' });
       } else {
         console.warn('Element with id="home" not found on the main page.');
-        // Fallback: Navigate to top of page
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
     handleMobileLinkClick();
   };
 
+  const handleServiceClick = () => {
+    navigate('/servicepage');
+    handleMobileLinkClick();
+  };
+
+  const handleCreationsClick = () => {
+    navigate('/creationpage');
+    handleMobileLinkClick();
+  };
+
   const navLinks = [
-    { name: 'Home', href: '#home' }, // href kept for non-Home links, but Home uses navigate
-    ...(isSpecialPage ? [] : [
-      { name: 'Who We Are', href: '#about' },
-      { name: 'What We Do', href: '#service' },
-      { name: 'Our Creations', href: '#Creations' },
-      { name: 'Career', href: '#career' },
-    ]),
+    { name: 'Home', action: handleHomeClick },
+    ...(isSpecialPage
+      ? []
+      : [
+          { name: 'Who We Are', href: '#about' },
+          { name: 'What We Do', action: handleServiceClick },
+          { name: 'Our Creations', action: handleCreationsClick },
+          { name: 'Career', href: '#career' },
+        ]),
   ];
 
   return (
@@ -69,18 +85,18 @@ const Navbar = ({ setIsOpen }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          {navLinks.map((link, index) => (
-            link.name === 'Home' ? (
+          {navLinks.map((link, index) =>
+            link.action ? (
               <motion.button
                 key={link.name}
-                onClick={handleHomeClick}
+                onClick={link.action}
                 className="hover:text-purple-400 transition-colors relative group"
                 style={{ fontFamily: "'Exo 2', sans-serif", letterSpacing: '0.05em' }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index + 0.4 }}
                 whileHover={{ scale: 1.05 }}
-                aria-label="Navigate to home"
+                aria-label={`Navigate to ${link.name}`}
               >
                 {link.name}
                 <motion.span
@@ -106,7 +122,7 @@ const Navbar = ({ setIsOpen }) => {
                 />
               </motion.a>
             )
-          ))}
+          )}
           <motion.button
             onClick={() => setIsOpen(true)}
             className="bg-purple-600 hover:bg-purple-700 px-4 py-1.5 rounded-full text-white font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(147,51,234,0.5)]"
@@ -148,18 +164,18 @@ const Navbar = ({ setIsOpen }) => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            {navLinks.map((link, index) => (
-              link.name === 'Home' ? (
+            {navLinks.map((link, index) =>
+              link.action ? (
                 <motion.button
                   key={link.name}
-                  onClick={handleHomeClick}
+                  onClick={link.action}
                   className="block w-full py-3 text-gray-200 hover:text-purple-400 border-b border-gray-700 last:border-none text-center bg-transparent"
                   style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
                   whileHover={{ x: 5 }}
-                  aria-label="Navigate to home"
+                  aria-label={`Navigate to ${link.name}`}
                 >
                   {link.name}
                 </motion.button>
@@ -178,7 +194,7 @@ const Navbar = ({ setIsOpen }) => {
                   {link.name}
                 </motion.a>
               )
-            ))}
+            )}
             <motion.button
               onClick={() => {
                 setIsOpen(true);

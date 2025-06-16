@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Gamepad2, PaintBucket, Layout, Shapes, Globe, Mountain, ChevronLeft, ChevronRight, Code, Zap, Target, Cpu } from 'lucide-react';
-import Game from '../imgs/game dev.jpg'; // Assuming you have a game image
-import UIUX from '../imgs/UX Design.jpg'; // Assuming you have a UI/UX image
-import GraphicArt from '../imgs/Graphic Artistry.png'; // Assuming you have a Graphic Art image
-import Logo from '../imgs/Logo Creation.avif'; // Assuming you have a Logo image
-import WebDev from '../imgs/Web Development.jpg'; // Assuming you have a Web Development image
-import LevelDesign from '../imgs/Level Design.jpg'; // Assuming you have a Level Design image
+import { Gamepad2, PaintBucket, Layout, Shapes, Globe, Mountain, ChevronLeft, ChevronRight, Code, Zap, Target, Cpu , Bot } from 'lucide-react';
+import Game from '../imgs/game dev.jpg'; 
+import UIUX from '../imgs/UX Design.jpg'; 
+import GraphicArt from '../imgs/Graphic Artistry.png';
+import Logo from '../imgs/Logo Creation.avif'; 
+import WebDev from '../imgs/Web Development.jpg'; 
+import LevelDesign from '../imgs/Level Design.jpg'; 
+import AIautomation from '../imgs/ai-automation.jpg';
 
 const ServiceCard = ({ title, subtitle, icon, image, isActive }) => {
   return (
@@ -101,6 +102,12 @@ const Services = () => {
       subtitle: '2D & 3D Environment Art',
       icon: <Mountain size={24} />,
       image: LevelDesign,
+    },
+    {
+      title: 'AI Automation',
+      subtitle: 'Effortless Digital Transformation',
+      icon: <Bot size={24} />,
+      image: AIautomation,
     },
   ];
 

@@ -194,7 +194,7 @@ const About = () => {
         variants={containerVariants}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10"
+        className="w-full max-w-full px-0 relative z-10"
       >
         <motion.div
           variants={itemVariants}
@@ -219,32 +219,26 @@ const About = () => {
           Crafting Extraordinary Gaming Experiences
         </motion.h1>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-          {/* GIF with Animation */}
+        <div className="flex flex-col md:flex-row justify-between items-stretch">
+          {/* Image Section */}
           <motion.div
             variants={itemVariants}
-            className="w-full md:w-1/2 relative"
+            className="w-full md:w-1/2 h-full"
           >
             <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-900/20 group">
               <div className="absolute inset-0 z-0 group-hover:opacity-50 transition-opacity duration-500" />
               <img
                 src={gameShowcase}
                 alt="3D gaming projection"
-                className="w-full h-[400px] relative z-10 object-cover group-hover:scale-102 transition-transform duration-700"
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
               />
             </div>
-            <motion.div
-              className="absolute -top-4 -left-4 w-24 h-24 sm:w-32 sm:h-32 border border-purple-500/20 rounded-md z-0"
-              animate={{ rotate: [0, 45], borderColor: ['rgba(168, 85, 247, 0.2)', 'rgba(153, 51, 255, 0.2)'] }}
-              transition={{ duration: 6, repeat: Infinity, repeatType: 'reverse' }}
-            />
-            <div className="absolute -bottom-4 -right-4 w-40 h-40 sm:w-48 sm:h-48 bg-purple-500/10 rounded-full blur-xl z-0" />
           </motion.div>
 
           {/* Text Content */}
           <motion.div
             variants={itemVariants}
-            className="w-full md:w-1/2 text-center md:text-left"
+            className="w-full md:w-1/2 h-full flex flex-col justify-center px-4 sm:px-6 md:px-8"
           >
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6"

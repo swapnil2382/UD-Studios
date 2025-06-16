@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Code, Gamepad2, Zap, Target, Cpu } from "lucide-react";
+import { Code, Gamepad2, Zap, Target, Cpu , ExternalLink } from "lucide-react";
 import { FaHourglassEnd } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -384,6 +384,26 @@ const Creations = () => {
               image={bot.image}
             />
           ))}
+          
+          {/* Test Mr.PA Link */}
+          <div className="text-center mt-8">
+            <motion.a
+              href="https://dummy-mrpa-link.com" // Replace with your actual Mr.PA website URL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full text-white font-semibold text-lg hover:brightness-110 transition-all shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-105"
+              style={{ fontFamily: '"Orbitron", sans-serif' }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+               <ExternalLink size={18} className="group-hover:rotate-12 transition-transform duration-300 mr-2" />
+              Test Mr.PA
+            </motion.a>
+          </div>
         </div>
 
         <div className="text-center mt-16 px-4">

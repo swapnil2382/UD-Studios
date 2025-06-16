@@ -2,7 +2,45 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
-import teamImage from '../imgs/team.jpeg'; // Adjust path if needed
+
+const TeamMemberCard = ({ name, image }) => {
+  return (
+    <motion.div
+      className="w-full rounded-xl overflow-hidden border border-purple-400/40 shadow-lg shadow-purple-900/30 bg-gradient-to-br from-black via-gray-900 to-black"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      style={{ boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)" }}
+    >
+      <motion.img
+        src={image}
+        alt={name}
+        className="w-full h-48 object-cover"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      />
+      <div className="px-6 py-4 text-white">
+        <h3
+          className="text-xl sm:text-2xl font-bold mb-2 tracking-wider text-purple-400"
+          style={{
+            fontFamily: '"Orbitron", sans-serif',
+            textShadow: "0 0 10px rgba(168, 85, 247, 0.8)",
+          }}
+        >
+          {name}
+        </h3>
+        <p
+          className="text-sm sm:text-base text-gray-300 leading-relaxed"
+          style={{ fontFamily: '"Rajdhani", sans-serif' }}
+        >
+          {/* Placeholder for role/description */}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 const Team = () => {
   const [ref, inView] = useInView({
@@ -29,67 +67,21 @@ const Team = () => {
 
   const gamingIcons = [Code, Gamepad2, Zap, Target, Cpu];
 
+  // Team members data
+  const teamMembers = [
+    { name: "Joy Prancyka", image: "https://via.placeholder.com/150" },
+    { name: "Chang", image: "https://via.placeholder.com/150" },
+    { name: "Madhu Malar", image: "https://via.placeholder.com/150" },
+  ];
+
   return (
     <section className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
       <style>
         {`
-          @keyframes wave {
-            0% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(-10px); opacity: 0.8; }
-            100% { transform: translateY(0); opacity: 0.5; }
-          }
           @keyframes pulse-glow {
             0% { box-shadow: 0 0 10px rgba(147, 51, 234, 0.4); }
             50% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.6); }
             100% { box-shadow: 0 0 10px rgba(147, 51, 234, 0.4); }
-          }
-          .wave-particle {
-            position: absolute;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, transparent, #9333ea, transparent);
-            opacity: 0.5;
-            animation: wave 3s infinite;
-          }
-          .wave-particle:nth-child(2) { animation-delay: -1s; top: 20%; }
-          .wave-particle:nth-child(3) { animation-delay: -2s; top: 40%; }
-          .wave-particle:nth-child(4) { animation-delay: -1.5s; top: 60%; }
-          .wave-particle:nth-child(5) { animation-delay: -0.5s; top: 80%; }
-          .glow-image {
-            animation: pulse-glow 2s infinite;
-          }
-          .corner-border {
-            position: relative;
-            padding: 1.5rem; /* Reduced padding for mobile */
-          }
-          @media (min-width: 768px) {
-            .corner-border {
-              padding: 3rem; /* Original padding for laptop view */
-            }
-          }
-          .corner-border::before,
-          .corner-border::after {
-            content: '';
-            position: absolute;
-            border-color: #9333ea;
-            border-style: solid;
-            border-width: 2px;
-          }
-          .corner-border::before {
-            top: 0;
-            right: 0;
-            border-bottom: none;
-            border-left: none;
-            width: 50%;
-            height: 50%;
-          }
-          .corner-border::after {
-            bottom: 0;
-            left: 0;
-            border-top: none;
-            border-right: none;
-            width: 50%;
-            height: 50%;
           }
         `}
       </style>
@@ -202,7 +194,7 @@ const Team = () => {
             className="inline-block px-4 sm:px-6 py-2 bg-purple-900/40 backdrop-blur-sm text-purple-300 rounded-full mb-4 border border-purple-600/30"
             style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
           >
-            Meet The Talent
+            Meet Key Players
           </h2>
           <h3
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6"
@@ -210,17 +202,11 @@ const Team = () => {
           >
             Our Team
           </h3>
-          <p
-            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl sm:max-w-3xl mx-auto"
-            style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
-          >
-            The creative minds and skilled professionals behind our gaming innovations
-          </p>
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center mb-12">
-          {/* Left: Text Content */}
+        <div className="max-w-7xl mx-auto mb-12">
+          {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -230,47 +216,32 @@ const Team = () => {
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
               style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
             >
-              We Break Rules,
+              We Follow No Rules,
             </h3>
             <h3
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-300 mb-4"
               style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
             >
-              Own Worlds
+              But Own Responsibilities
             </h3>
             <p
               className="text-sm sm:text-base md:text-lg text-gray-300 mb-6 leading-relaxed"
               style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
             >
-              These are the minds behind the mission. The masterminds. The strategists. Get to know the crew behind every glitch-free miracle and game-changing move.Our developers are the architects of innovation writing clean code, squashing bugs, and building seamless digital worlds. Our designers are visual storytellers turning big ideas into bold, beautiful interfaces that captivate at first glance.Our marketing mavericks are the voice and vision crafting campaigns that cut through the noise and spark real impact.            </p>
+              These are the minds behind the mission. The masterminds. The strategists. Get to know the crew behind every glitch-free miracle and game-changing move. Our developers are the architects of innovation writing clean code, squashing bugs, and building seamless digital worlds. Our designers are visual storytellers turning big ideas into bold, beautiful interfaces that captivate at first glance. Our marketing mavericks are the voice and vision crafting campaigns that cut through the noise and spark real impact.
+            </p>
           </motion.div>
 
-          {/* Right: Team Image with Background Effect */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex justify-center md:justify-end"
-          >
-            <div className="relative w-full max-w-full sm:max-w-2xl md:max-w-xl corner-border">
-              {/* Wave Particles Background */}
-              <div className="absolute inset-0 overflow-hidden rounded-lg">
-                <div className="wave-particle" style={{ top: '10%' }} />
-                <div className="wave-particle" />
-                <div className="wave-particle" />
-                <div className="wave-particle" />
-                <div className="wave-particle" />
-              </div>
-              <motion.img
-                src={teamImage}
-                alt="Our Team"
-                className="relative w-full h-auto object-contain rounded-lg"
-                style={{ aspectRatio: '4/3.8' }}
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+          {/* Team Member Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+            {teamMembers.map((member, index) => (
+              <TeamMemberCard
+                key={member.name}
+                name={member.name}
+                image={member.image}
               />
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Footer Text */}
@@ -290,7 +261,7 @@ const Team = () => {
             className="text-sm sm:text-base md:text-lg text-gray-300 max-w-xl mx-auto"
             style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
           >
-            We work with the same ease and comfort of home          
+            We work with the same ease and comfort of home
           </p>
         </motion.div>
       </motion.div>
