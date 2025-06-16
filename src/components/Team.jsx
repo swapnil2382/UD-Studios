@@ -2,8 +2,8 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
-import chang from '../imgs/chang.jpg'; // Adjust the import path as necessary
-import joy from '../imgs/joy.jpg'; // Adjust the import path as necessary
+import chang from '../imgs/chang.jpg'; 
+import joy from '../imgs/joy.jpg';
 import vk from '../imgs/Vasanth.jpg';
 
 const TeamMemberCard = ({ name, image }) => {
