@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +27,17 @@ export default function HeroSection() {
   }, []);
 
   // Split the h1 text into words, then into letters for hover animation
-  const h1Text = "The arena is open. The world is watching. Let the games begin.".split(" ");
+const h1Text = "The arena is open. The world is watching. Let the games begin.".split(" ");
+
+const formattedText = h1Text.map((word, index) => (
+  <React.Fragment key={index}>
+    {word}{" "}
+    {word.endsWith(".") && <br />}
+  </React.Fragment>
+));
+
+// Usage in JSX
+<h1>{formattedText}</h1>
 
   return (
     <>
@@ -122,13 +133,13 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, delay: 0.3 }}
           >
-      <motion.h1
+ <motion.h1
   className="font-extrabold leading-tight drop-shadow-lg tracking-wider select-none w-full text-left break-words pb-2 sm:pb-3"
   style={{
     fontFamily: '"Orbitron", monospace',
     fontWeight: '800',
     fontSize: 'clamp(2rem, 8vw, 4.2rem)',
-    lineHeight: '1.3', // Increased for letters like 'g'
+    lineHeight: '1.3',
     letterSpacing: '0em',
     background: 'linear-gradient(45deg, #ffffff 30%, rgba(255, 255, 255, 0.2) 50%, #ffffff 70%)',
     backgroundSize: '300% 300%',
@@ -142,33 +153,37 @@ export default function HeroSection() {
   }}
 >
   {h1Text.map((word, wordIndex) => (
-    <span key={wordIndex} className="inline-flex mr-2 sm:mr-3">
-      {word.split("").map((letter, letterIndex) => (
-        <motion.span
-          key={`${wordIndex}-${letterIndex}`}
-          className="inline-block"
-          initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.5 + wordIndex * 0.2 + letterIndex * 0.05,
-            type: "spring",
-            stiffness: 100,
-            damping: 10,
-          }}
-          whileHover={{
-            scale: 1.2,
-            color: "#000000",
-            WebkitTextStroke: "1px #ffffff",
-            transition: { duration: 0.1 },
-          }}
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
-    </span>
+    <React.Fragment key={`word-${wordIndex}`}>
+      <span className="inline-flex mr-2 sm:mr-3">
+        {word.split("").map((letter, letterIndex) => (
+          <motion.span
+            key={`${wordIndex}-${letterIndex}`}
+            className="inline-block"
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.5 + wordIndex * 0.2 + letterIndex * 0.05,
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+            }}
+            whileHover={{
+              scale: 1.2,
+              color: "#000000",
+              WebkitTextStroke: "1px #ffffff",
+              transition: { duration: 0.1 },
+            }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </motion.span>
+        ))}
+      </span>
+      {word.endsWith(".") && <br />}
+    </React.Fragment>
   ))}
 </motion.h1>
+
 
 
 

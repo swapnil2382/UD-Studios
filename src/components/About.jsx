@@ -265,16 +265,17 @@ const About = () => {
               With a player-first mindset and a deep love for gaming, we're on a mission to shape the next generation of interactive entertainment—right here from Chennai.
             </p>
 
-            <motion.button
-              onClick={() => navigate('/servicepage')}
-              className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-md font-semibold text-base sm:text-lg border border-purple-400/20 shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
-              style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 12px rgba(153, 51, 255, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Discover our services"
-            >
-              Discover Our Services
-            </motion.button>
+       <motion.button
+  onClick={() => navigate('/servicepage')}
+  className="w-[300px] mx-auto block px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-md font-semibold text-sm sm:text-base border border-purple-400/20 shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+  style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
+  whileHover={{ scale: 1.05, boxShadow: '0 0 12px rgba(153, 51, 255, 0.5)' }}
+  whileTap={{ scale: 0.95 }}
+  aria-label="Discover our services"
+>
+  Discover Our Services
+</motion.button>
+
           </motion.div>
         </div>
       </motion.div>

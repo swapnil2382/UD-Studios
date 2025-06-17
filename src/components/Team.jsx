@@ -1,51 +1,85 @@
 import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
-import chang from '../imgs/chang.jpg'; 
-import joy from '../imgs/Joy.jpg';
-import vk from '../imgs/Vasanth.jpg';
+import { Code, Gamepad2, Zap, Target, Cpu, Linkedin } from 'lucide-react';
 
-const TeamMemberCard = ({ name, image }) => {
+// Sample images - replace these with your actual image imports
+import chang from '../imgs/chang.jpg'; // Adjust the path as necessary
+import joy from '../imgs/Joy.jpg'; // Adjust the path as necessary
+import vk from '../imgs/Vasanth.jpg'; // Adjust the path as necessary
+
+const TeamMemberCard = ({ name, image, role, linkedinUrl }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
     <motion.div
-      className="w-full rounded-xl overflow-hidden border border-purple-400/40 shadow-lg shadow-purple-900/30 bg-gradient-to-br from-black via-gray-900 to-black"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.02 }}
+      className="relative flex items-center justify-center p-4 bg-gradient-to-r from-purple-900/20 to-black/50 backdrop-blur-sm rounded-xl border border-purple-600/30 shadow-lg hover:shadow-purple-900/30 transition-all duration-300 h-full overflow-hidden"
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.02, backgroundColor: 'rgba(139, 92, 246, 0.1)' }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      style={{ boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ boxShadow: isHovered ? "0 0 20px rgba(139, 92, 246, 0.4)" : "0 4px 15px rgba(0, 0, 0, 0.3)" }}
     >
-      <div className="relative overflow-hidden">
+      {/* Profile Image */}
+      <div className="relative w-full h-full">
         <motion.img
           src={image}
           alt={name}
-          className="w-full h-[440px] object-cover object-top rounded-t-xl border-b-2 border-purple-500/30"
-          whileHover={{ scale: 1.05 }}
+          className="w-full h-full object-cover object-center rounded-xl"
+          whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          onError={(e) => (e.target.src = 'https://via.placeholder.com/300')} // Fallback image
-          style={{ boxShadow: 'inset 0 0 10px rgba(147, 51, 234, 0.3)' }}
+          onError={(e) => (e.target.src = 'https://via.placeholder.com/150x150/8B5CF6/FFFFFF?text=' + name.charAt(0))}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
       </div>
-      <div className="px-6 py-4 text-white">
-        <h3
-          className="text-xl sm:text-2xl font-bold mb-2 tracking-wider text-purple-400"
+
+      {/* Overlay with Name, Role, and LinkedIn Icon on Hover */}
+      <motion.div
+        className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-2 opacity-0"
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <motion.h3
+          className="text-lg font-bold tracking-wider text-purple-400"
           style={{
             fontFamily: '"Orbitron", sans-serif',
-            textShadow: "0 0 10px rgba(168, 85, 247, 0.8)",
+            textShadow: isHovered ? "0 0 10px rgba(168, 85, 247, 0.8)" : "none",
           }}
+          initial={{ y: 5, opacity: 0 }}
+          animate={{ y: 0, opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           {name}
-        </h3>
-        <p
-          className="text-sm sm:text-base text-gray-300 leading-relaxed"
+        </motion.h3>
+        
+        <motion.p
+          className="text-sm text-gray-300"
           style={{ fontFamily: '"Rajdhani", sans-serif' }}
+          initial={{ y: 5, opacity: 0 }}
+          animate={{ y: 0, opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
         >
-          {/* Placeholder for role/description */}
-        </p>
-      </div>
+          {role}
+        </motion.p>
+
+        <motion.a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-10 h-10 bg-purple-600/80 hover:bg-purple-500 rounded-full transition-colors duration-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          animate={{ 
+            scale: isHovered ? 1.05 : 1,
+            backgroundColor: isHovered ? 'rgba(147, 51, 234, 1)' : 'rgba(147, 51, 234, 0.8)'
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <Linkedin size={18} className="text-white" />
+        </motion.a>
+      </motion.div>
     </motion.div>
   );
 };
@@ -60,8 +94,8 @@ const Team = () => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const xTransform = useTransform(mouseX, [0, window.innerWidth || 1920], [-50, 50]);
-  const yTransform = useTransform(mouseY, [0, window.innerHeight || 1080], [-30, 30]);
+  const xTransform = useTransform(mouseX, [0, 1920], [-50, 50]);
+  const yTransform = useTransform(mouseY, [0, 1080], [-30, 30]);
 
   React.useEffect(() => {
     const handleMouseMove = (e) => {
@@ -75,11 +109,26 @@ const Team = () => {
 
   const gamingIcons = [Code, Gamepad2, Zap, Target, Cpu];
 
-  // Team members data
+  // Team members data with roles and LinkedIn URLs
   const teamMembers = [
-    { name: "Joy Prancyka", image: joy },
-    { name: "Chang", image: chang },
-    { name: "Madhu Malar", image: vk },
+    { 
+      name: "Joy Prancyka", 
+      image: joy,
+      role: "Lead Developer",
+      linkedinUrl: "https://linkedin.com/in/joyprancyka"
+    },
+    { 
+      name: "Chang", 
+      image: chang,
+      role: "UI/UX Designer",
+      linkedinUrl: "https://linkedin.com/in/chang"
+    },
+    { 
+      name: "Madhu Malar", 
+      image: vk,
+      role: "Marketing Strategist",
+      linkedinUrl: "https://linkedin.com/in/madhumalar"
+    },
   ];
 
   return (
@@ -94,7 +143,7 @@ const Team = () => {
         `}
       </style>
 
-      {/* Background elements from Creations */}
+      {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 opacity-50">
           <div
@@ -178,7 +227,8 @@ const Team = () => {
           </svg>
         </div>
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-600/40 to-transparent rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-600/ XML
+40 to-transparent rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -212,52 +262,72 @@ const Team = () => {
           </h3>
         </div>
 
-        {/* Main Content */}
+        {/* Main Content - Text Left, Cards Right */}
         <div className="max-w-7xl mx-auto mb-12">
-          {/* Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
-              style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
+          <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 lg:gap-12 items-stretch">
+            
+            {/* Left Side - Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6"
             >
-              We Follow No Rules,
-            </h3>
-            <h3
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-300 mb-4"
-              style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
-            >
-              But Own Responsibilities
-            </h3>
-            <p
-              className="text-sm sm:text-base md:text-lg text-gray-300 mb-6 leading-relaxed"
-              style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
-            >
-              These are the minds behind the mission. The masterminds. The strategists. Get to know the crew behind every glitch-free miracle and game-changing move. Our developers are the architects of innovation writing clean code, squashing bugs, and building seamless digital worlds. Our designers are visual storytellers turning big ideas into bold, beautiful interfaces that captivate at first glance. Our marketing mavericks are the voice and vision crafting campaigns that cut through the noise and spark real impact.
-            </p>
-          </motion.div>
+              <div>
+                <h3
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
+                  style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
+                >
+                  We Follow No Rules,
+                </h3>
+                <h3
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-300 mb-6"
+                  style={{ fontFamily: '"Orbitron", sans-serif', letterSpacing: '0.05em' }}
+                >
+                  But Own Responsibilities
+                </h3>
+                <p
+                  className="text-sm sm:text-base md:text-lg text-gray-300 mb-8 leading-relaxed"
+                  style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
+                >
+                  These are the minds behind the mission. The masterminds. The strategists. Get to know the crew behind every glitch-free miracle and game-changing move. Our developers are the architects of innovation writing clean code, squashing bugs, and building seamless digital worlds. Our designers are visual storytellers turning big ideas into bold, beautiful interfaces that captivate at first glance. Our marketing mavericks are the voice and vision crafting campaigns that cut through the noise and spark real impact.
+                </p>
+              </div>
+            </motion.div>
 
-          {/* Team Member Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
-            {teamMembers.map((member, index) => (
-              <TeamMemberCard
-                key={member.name}
-                name={member.name}
-                image={member.image}
-              />
-            ))}
+            {/* Right Side - Team Member Cards */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-col md:flex-col lg:flex-row items-stretch justify-between gap-4 h-auto"
+            >
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
+                  className="flex-1 lg:flex-1 sm:flex-none md:flex-none"
+                >
+                  <TeamMemberCard
+                    name={member.name}
+                    image={member.image}
+                    role={member.role}
+                    linkedinUrl={member.linkedinUrl}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
 
-        {/* Footer Text */}
+        {/* Work Hard, Dream Big Section - Centered at the End */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12"
         >
           <h3
             className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2"
@@ -266,10 +336,10 @@ const Team = () => {
             Work Hard, Dream Big
           </h3>
           <p
-            className="text-sm sm:text-base md:text-lg text-gray-300 max-w-xl mx-auto"
+            className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto"
             style={{ fontFamily: '"Rajdhani", sans-serif', fontWeight: 400 }}
           >
-            We work with the same ease and comfort of home
+            We work with the same ease and comfort of home. Click on the LinkedIn icon to connect with each team member and learn more about their professional journey.
           </p>
         </motion.div>
       </motion.div>

@@ -469,14 +469,8 @@ export default function CreationPage() {
                                             >
                                                 {bot.description3}
                                             </p>
-                                        </div>
-                                    </div>
-                                </motion.article>
-                            ))}
-
-                            {/* Test Mr.PA Button */}
-                            <motion.div
-                                className="flex justify-center mt-8 sm:mt-12"
+                                             <motion.div
+                                className="flex justify mt-8 sm:mt-12"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.3 }}
@@ -484,7 +478,7 @@ export default function CreationPage() {
                             >
                                 <motion.button
                                     onClick={handleTestMrPA}
-                                    className="group relative px-8 sm:px-10 py-3 sm:py-4 rounded-full text-white font-semibold bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:via-indigo-500 hover:to-purple-600 transition-all duration-300 text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl border border-purple-400/30 hover:border-purple-300/50"
+                                    className="group relative px-8 sm:px-8 py-3 sm:py-2 rounded-full text-white font-semibold bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:via-indigo-500 hover:to-purple-600 transition-all duration-300 text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl border border-purple-400/30 hover:border-purple-300/50"
                                     style={{
                                         fontFamily: '"Orbitron", monospace',
                                         letterSpacing: '0.05em',
@@ -499,14 +493,21 @@ export default function CreationPage() {
                                     whileTap={{ scale: 0.98 }}
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
-                                        Test Mr.PA
-                                        <ExternalLink size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+                                    <ExternalLink size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+                                    Explore Mr.PA
                                     </span>
                                     
                                     {/* Animated background glow */}
                                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
                                 </motion.button>
                             </motion.div>
+                                        </div>
+                                    </div>
+                                </motion.article>
+                            ))}
+
+                            {/* Test Mr.PA Button */}
+                           
                         </div>
                     )}
                 </section>
