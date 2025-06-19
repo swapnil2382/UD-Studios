@@ -10,7 +10,6 @@ const Navbar = lazy(() => import('./components/Navbar'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
 const Creations = lazy(() => import('./components/Creations'));
-const Team = lazy(() => import('./components/Team'));
 const Founder = lazy(() => import('./components/Founder'));
 const Career = lazy(() => import('./components/Career'));
 const Footer = lazy(() => import('./components/Footer'));
@@ -69,7 +68,6 @@ function App() {
                       <About />
                       <Services />
                       <Creations />
-                      <Team />
                       <Founder />
                       <Career />
                       <Footer setIsOpen={setIsOpen} />

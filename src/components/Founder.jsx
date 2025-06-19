@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Gamepad2, Zap, Target, Cpu } from 'lucide-react';
-import VasanthImg from '../imgs/Vasanth.jpg'; // Adjust path if needed
+import VasanthImg from '../imgs/vasanth vk.jpg'; // Adjust path if needed
 
 const Founder = () => {
   const [ref, inView] = useInView({
